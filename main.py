@@ -1,5 +1,5 @@
 from PIL import Image
-from google import genai
+import google.generativeai as genai
 import streamlit as st
 
 api_key = st.secrets["api_key"]
@@ -28,11 +28,12 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, use_container_width=True)
 
-    client = genai.Client(api_key=api_key)
+    genai.configure(api_key=api_key)
 
-    response = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=[image, "Tell me about this image"]
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
+    response = model.generate_content(
+        [image, "Tell me about this image"]
     )
     # pl = markdown_to_text(response.text)
     # st.code(pl)
