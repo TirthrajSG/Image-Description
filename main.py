@@ -4,6 +4,12 @@ import streamlit as st
 
 api_key = st.secrets["api_key"]
 
+st.set_page_config(
+    page_title="Image Description App",  # Title of the browser tab
+    page_icon="🖼️",                      # Optional: icon in the tab
+    layout="centered",                   # or "wide"
+    initial_sidebar_state="auto"         # or "expanded", "collapsed"
+)
 
 st.markdown("""
 <div style='text-align: right'>
